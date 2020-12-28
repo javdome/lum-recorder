@@ -1,0 +1,22 @@
+body {
+    margin: 0px;
+    -webkit-app-region: drag;
+    overflow: hidden;
+    position: relative;
+    /* -webkit-transform: scaleX(-1);
+    transform: scaleX(-1); */
+}
+
+#mycam {
+    border-radius: 50%;
+    width: 90vw;
+    height: 90vh;
+    border-style: solid;
+    /* border-color:#e5f940; */
+    border-color: #ce0037;
+    box-shadow: 5px 5px 5px #4b4b4b;
+    object-fit: cover;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    margin-left: 5%;
+}

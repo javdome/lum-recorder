@@ -1,10 +1,12 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
+
+let isShownFace = false;
 
 const createWindow = () => {
   // Create the browser window.
@@ -15,12 +17,39 @@ const createWindow = () => {
       nodeIntegration: true
     }
   });
+  const winFace = new BrowserWindow({
+    width: 250,
+    height: 250,
+    alwaysOnTop: true,
+    maximizable:false,
+    frame: false,
+    show: false,
+    transparent: true,
+    autoHideMenuBar: true,
+    // icon: __dirname +'/rounded-cam-icon.ico',
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+  winFace.setAlwaysOnTop(true, "screen-saver");
+  winFace.setAutoHideMenuBar(true);
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  winFace.loadFile(path.join(__dirname, 'face.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  ipcMain.on('faceBtn-clicked', () => {
+    if(!isShownFace) {
+      winFace.show();
+      isShownFace = true;
+    } else {
+      winFace.hide();
+      isShownFace = false;
+    }
+  });
 };
 
 // This method will be called when Electron has finished

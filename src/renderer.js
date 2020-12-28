@@ -1,4 +1,4 @@
-const { desktopCapturer } = require('electron')
+const { desktopCapturer, ipcRenderer } = require('electron')
 
 window.onload = () => {
     const warningEl = document.getElementById('warning');
@@ -9,6 +9,14 @@ window.onload = () => {
     const download = document.getElementById('download');
     const audioToggle = document.getElementById('audioToggle');
     const micAudioToggle = document.getElementById('micAudioToggle');
+
+    const faceBtn = document.getElementById('faceBtn');
+
+    faceBtn.onclick = () => {
+      ipcRenderer.send('faceBtn-clicked');
+    };
+
+
     
     if('getDisplayMedia' in navigator.mediaDevices) warningEl.style.display = 'none';
   
@@ -49,28 +57,15 @@ window.onload = () => {
       const audio = audioToggle.checked || false;
       const mic = micAudioToggle.checked || false;
 
-
-      // desktopCapturer.getSources({ types: ['window', 'screen'] }).then(async sources => {
-        // for (const source of sources) {
-          // if (source.name === 'Electron') {
-            
-            desktopStream = await navigator.mediaDevices.getUserMedia({
-                audio: false,
-                video: {
-                  mandatory: {
-                    chromeMediaSource: 'desktop',
-                    chromeMediaSourceId: 'screen:0:0',
-                    minWidth: 1280,
-                    maxWidth: 1920,
-                    minHeight: 720,
-                    maxHeight: 1080
-                  }
-                }
-              })
-          // }
-        // }
-      // });
-      // desktopStream = await navigator.mediaDevices.getDisplayMedia({ video:true, audio: audio });
+      desktopStream = await navigator.mediaDevices.getUserMedia({
+          audio: false,
+          video: {
+            mandatory: {
+              chromeMediaSource: 'desktop',
+              chromeMediaSourceId: 'screen:0:0'
+            }
+          }
+        })
       
       if (mic === true) {
         voiceStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: mic });

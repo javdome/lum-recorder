@@ -61,9 +61,9 @@ window.onload = () => {
                     chromeMediaSource: 'desktop',
                     chromeMediaSourceId: 'screen:0:0',
                     minWidth: 1280,
-                    maxWidth: 1280,
+                    maxWidth: 1920,
                     minHeight: 720,
-                    maxHeight: 720
+                    maxHeight: 1080
                   }
                 }
               })
@@ -89,7 +89,7 @@ window.onload = () => {
         
       blobs = [];
     
-      rec = new MediaRecorder(stream, {mimeType: 'video/webm; codecs=vp8,opus'});
+      rec = new MediaRecorder(stream, {mimeType: 'video/webm; codecs=vp9,opus'});
       rec.ondataavailable = (e) => blobs.push(e.data);
       rec.onstop = async () => {
         

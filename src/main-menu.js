@@ -122,12 +122,16 @@ window.onload = () => {
       micAudioToggle.disabled = true;
     };
   
+
+    /* STARTS TO RECORD */
     startBtn.onclick = () => {
       startBtn.disabled = true;
       stopBtn.disabled = false;
       rec.start();
     };
   
+
+    /* STOPS TO RECORD */
     stopBtn.onclick = () => {
       captureBtn.disabled = false;
       audioToggle.disabled = false;

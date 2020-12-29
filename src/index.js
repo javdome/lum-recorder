@@ -9,7 +9,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 let isShownFace = false;
 
 const createWindow = () => {
-  // Create the browser window.
+  // Create the main menu window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -18,6 +18,7 @@ const createWindow = () => {
       enableRemoteModule: true,
     }
   });
+  // Create the rounded face window.
   const winFace = new BrowserWindow({
     width: 250,
     height: 250,
@@ -36,12 +37,13 @@ const createWindow = () => {
   winFace.setAutoHideMenuBar(true);
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'main-menu.html'));
   winFace.loadFile(path.join(__dirname, 'face.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
+  //Toggles the visibility of the rounded face
   ipcMain.on('faceBtn-clicked', () => {
     if(!isShownFace) {
       winFace.show();

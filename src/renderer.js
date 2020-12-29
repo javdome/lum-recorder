@@ -1,4 +1,5 @@
-const { desktopCapturer, ipcRenderer } = require('electron')
+const { desktopCapturer, ipcRenderer, remote } = require('electron');
+const { Menu } = remote;
 
 window.onload = () => {
     const warningEl = document.getElementById('warning');
@@ -52,20 +53,40 @@ window.onload = () => {
       return (hasDesktop || hasVoice) ? destination.stream.getAudioTracks() : [];
     };
   
-    captureBtn.onclick = async () => {
+    
+    /* SELECCION DE LO QUE SE QUIERE GRABAR Y STREAMS PREPARADOS */
+    captureBtn.onclick = async function () {
+      const inputSources = await desktopCapturer.getSources({
+        types: [ 'screen']
+      });
+      console.log(inputSources);
+      const videoOptionsMenu = Menu.buildFromTemplate(
+        inputSources.map(source => {
+          return {
+            label: source.name,
+            click: () => selectSource(source)
+          }
+        })
+      );
+    
+      videoOptionsMenu.popup();
+    };
+    
+    
+    async function selectSource(source) {
       download.style.display = 'none';
       const audio = audioToggle.checked || false;
       const mic = micAudioToggle.checked || false;
-
+          
       desktopStream = await navigator.mediaDevices.getUserMedia({
-          audio: false,
-          video: {
-            mandatory: {
-              chromeMediaSource: 'desktop',
-              chromeMediaSourceId: 'screen:0:0'
-            }
+        audio: false,
+        video: {
+          mandatory: {
+            chromeMediaSource: 'desktop',
+            chromeMediaSourceId: source.id,
           }
-        })
+        }
+      })
       
       if (mic === true) {
         voiceStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: mic });

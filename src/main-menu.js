@@ -153,7 +153,7 @@ window.onload = () => {
       cancelBtn.disabled = true;
       stopBtn.disabled = false;
       ipcRenderer.send('start-counter');
-      setTimeout( () => { rec.start() }, 5100);
+      setTimeout( () => { rec.start() }, 6100);
     };
   
 

@@ -77,7 +77,7 @@ const createWindow = () => {
   ipcMain.on('start-counter', () => {
     winCounter.webContents.send('counter-started');
     winCounter.show();
-    setTimeout( () => { winCounter.hide() }, 5000);
+    setTimeout( () => { winCounter.hide() }, 6000);
   });
 
 };

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -7,6 +7,31 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 }
 
 let isShownFace = false;
+let bigFace = false;
+let winFace = null;
+
+// Create the rounded face window.
+const createWinFace = () => { 
+  winFace = new BrowserWindow({
+    width: 250,
+    height: 250,
+    alwaysOnTop: true,
+    maximizable:false,
+    frame: false,
+    // show: false,
+    transparent: true,
+    autoHideMenuBar: true,
+    // icon: __dirname +'/rounded-cam-icon.ico',
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+  winFace.setAlwaysOnTop(true, "screen-saver");
+  winFace.loadFile(path.join(__dirname, 'face.html'));
+  // winFace.webContents.openDevTools();
+  bigFace = false;
+}
+
 
 const createWindow = () => {
   // Create the main menu window.
@@ -19,24 +44,9 @@ const createWindow = () => {
       enableRemoteModule: true,
     }
   });
-  // Create the rounded face window.
-  const winFace = new BrowserWindow({
-    width: 250,
-    height: 250,
-    alwaysOnTop: true,
-    maximizable:false,
-    frame: false,
-    show: false,
-    transparent: true,
-    autoHideMenuBar: true,
-    // icon: __dirname +'/rounded-cam-icon.ico',
-    webPreferences: {
-      nodeIntegration: true
-    }
-  });
-  winFace.setAlwaysOnTop(true, "screen-saver");
-  // winFace.setAutoHideMenuBar(true);
-  // Create the rounded face window.
+ 
+ 
+  // Create the counter window.
   const winCounter = new BrowserWindow({
     width: 425,
     height: 425,
@@ -56,7 +66,7 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'main-menu.html'));
-  winFace.loadFile(path.join(__dirname, 'face.html'));
+  
   winCounter.loadFile(path.join(__dirname, 'counter.html'));
 
   // Open the DevTools.
@@ -65,10 +75,11 @@ const createWindow = () => {
   //Toggles the visibility of the rounded face
   ipcMain.on('faceBtn-clicked', () => {
     if(!isShownFace) {
-      winFace.show();
+      createWinFace();
       isShownFace = true;
     } else {
-      winFace.hide();
+      winFace.close();
+      winFace = null;
       isShownFace = false;
     }
   });
@@ -80,12 +91,32 @@ const createWindow = () => {
     setTimeout( () => { winCounter.hide() }, 6000);
   });
 
+  // winFace.on('closed', function(){
+  //   winFace = null;
+  //   isShownFace = false;
+  //   bigFace = false;
+  // })
+
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.whenReady().then(() => {
+  
+  globalShortcut.register('Alt+CommandOrControl+1', () => {
+    if(winFace !=null ) {
+      if (bigFace) {
+        winFace.setSize(250,250);
+        bigFace = false;
+        
+      } else {
+        winFace.setSize(640,640);
+        bigFace = true;
+      }
+    }
+  })
+}).then(createWindow)
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

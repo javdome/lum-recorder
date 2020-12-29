@@ -1,0 +1,12 @@
+div {
+    background-color: blue;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10em;
+    font-weight: bold;
+    color: white;
+}

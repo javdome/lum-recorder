@@ -35,11 +35,29 @@ const createWindow = () => {
     }
   });
   winFace.setAlwaysOnTop(true, "screen-saver");
-  winFace.setAutoHideMenuBar(true);
+  // winFace.setAutoHideMenuBar(true);
+  // Create the rounded face window.
+  const winCounter = new BrowserWindow({
+    width: 425,
+    height: 425,
+    alwaysOnTop: true,
+    maximizable:false,
+    frame: false,
+    show: false,
+    transparent: true,
+    autoHideMenuBar: true,
+    // icon: __dirname +'/rounded-cam-icon.ico',
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+  winCounter.setAlwaysOnTop(true, "screen-saver");
+
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'main-menu.html'));
   winFace.loadFile(path.join(__dirname, 'face.html'));
+  winCounter.loadFile(path.join(__dirname, 'counter.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -54,6 +72,14 @@ const createWindow = () => {
       isShownFace = false;
     }
   });
+
+  //Shows and hides de counter
+  ipcMain.on('start-counter', () => {
+    winCounter.webContents.send('counter-started');
+    winCounter.show();
+    setTimeout( () => { winCounter.hide() }, 5000);
+  });
+
 };
 
 // This method will be called when Electron has finished

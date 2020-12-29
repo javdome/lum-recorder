@@ -11,6 +11,7 @@ window.onload = () => {
     const audioToggle = document.getElementById('audioToggle');
     const micAudioToggle = document.getElementById('micAudioToggle');
 
+    const cancelBtn = document.getElementById('cancelBtn');
     const faceBtn = document.getElementById('faceBtn');
 
     faceBtn.onclick = () => {
@@ -120,12 +121,36 @@ window.onload = () => {
       captureBtn.disabled = true;
       audioToggle.disabled = true;
       micAudioToggle.disabled = true;
+
+      cancelBtn.disabled = false;
     };
+
+
   
+    /* CANCELS THE SELECTION */
+    cancelBtn.onclick = () => {
+      captureBtn.disabled = false;
+      audioToggle.disabled = false;
+      micAudioToggle.disabled = false;
+      startBtn.disabled = true;
+      stopBtn.disabled = true;
+      cancelBtn.disabled = true;
+
+      blobs = undefined;
+      blob = undefined;
+      rec = undefined;
+      stream = undefined;
+      voiceStream = undefined;
+      desktopStream = undefined;
+
+      videoElement.srcObject = stream;
+    }
+
 
     /* STARTS TO RECORD */
     startBtn.onclick = () => {
       startBtn.disabled = true;
+      cancelBtn.disabled = true;
       stopBtn.disabled = false;
       rec.start();
     };

@@ -9,6 +9,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 let isShownFace = false;
 let bigFace = false;
 let winFace = null;
+let mainWindow;
 
 // Create the rounded face window.
 const createWinFace = () => { 
@@ -35,7 +36,7 @@ const createWinFace = () => {
 
 const createWindow = () => {
   // Create the main menu window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     autoHideMenuBar: true,
@@ -115,7 +116,11 @@ app.whenReady().then(() => {
         bigFace = true;
       }
     }
-  })
+  });
+
+  globalShortcut.register('Alt+CommandOrControl+9', () => {
+    mainWindow.webContents.send('please-stop');
+  });
 }).then(createWindow)
 
 // Quit when all windows are closed, except on macOS. There, it's common

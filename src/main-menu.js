@@ -171,4 +171,9 @@ window.onload = () => {
       videoElement.srcObject = null
       stream = null;
     };
+
+
+    ipcRenderer.on('please-stop', function(){
+      if (!stopBtn.disabled) stopBtn.click();
+    });
   };

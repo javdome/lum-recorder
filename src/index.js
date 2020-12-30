@@ -10,6 +10,7 @@ let isShownFace = false;
 let bigFace = false;
 let winFace = null;
 let mainWindow;
+let winCounter = null;
 
 // Create the rounded face window.
 const createWinFace = () => { 
@@ -31,11 +32,39 @@ const createWinFace = () => {
   winFace.loadFile(path.join(__dirname, 'face.html'));
   // winFace.webContents.openDevTools();
   bigFace = false;
+
+  winFace.on('close', function(){
+    winFace = null;
+    isShownFace = false;
+    bigFace = false;
+  });
+
 }
 
 
+// Create the counter window.
+const createWinCounter = () => { 
+  winCounter = new BrowserWindow({
+    width: 425,
+    height: 425,
+    alwaysOnTop: true,
+    maximizable:false,
+    frame: false,
+    // show: false,
+    transparent: true,
+    autoHideMenuBar: true,
+    // icon: __dirname +'/rounded-cam-icon.ico',
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+  winCounter.setAlwaysOnTop(true, "screen-saver");
+  winCounter.loadFile(path.join(__dirname, 'counter.html'));
+}
+
+
+// Create the main menu window.
 const createWindow = () => {
-  // Create the main menu window.
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -46,32 +75,16 @@ const createWindow = () => {
     }
   });
  
- 
-  // Create the counter window.
-  const winCounter = new BrowserWindow({
-    width: 425,
-    height: 425,
-    alwaysOnTop: true,
-    maximizable:false,
-    frame: false,
-    show: false,
-    transparent: true,
-    autoHideMenuBar: true,
-    // icon: __dirname +'/rounded-cam-icon.ico',
-    webPreferences: {
-      nodeIntegration: true
-    }
-  });
-  winCounter.setAlwaysOnTop(true, "screen-saver");
-
-
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'main-menu.html'));
-  
-  winCounter.loadFile(path.join(__dirname, 'counter.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  mainWindow.on('close', () => {
+    if (winCounter != null) winCounter.close();
+    if (winFace != null) winFace.close();
+  });
 
   //Toggles the visibility of the rounded face
   ipcMain.on('faceBtn-clicked', () => {
@@ -87,16 +100,12 @@ const createWindow = () => {
 
   //Shows and hides de counter
   ipcMain.on('start-counter', () => {
-    winCounter.webContents.send('counter-started');
-    winCounter.show();
-    setTimeout( () => { winCounter.hide() }, 6000);
+    createWinCounter();
+    setTimeout( () => {
+      winCounter.close();
+      winCounter = null;
+    }, 6000);
   });
-
-  // winFace.on('closed', function(){
-  //   winFace = null;
-  //   isShownFace = false;
-  //   bigFace = false;
-  // })
 
 };
 

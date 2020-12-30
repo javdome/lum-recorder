@@ -1,12 +1,8 @@
-const { ipcRenderer } = require('electron');
-
-ipcRenderer.on('counter-started', function(){
-    let num = 5;
-    let counter = document.getElementById('counter');
+let num = 5;
+let counter = document.getElementById('counter');
+counter.innerText = num;
+let counterIntervalId = setInterval(function(){
+    num--;
     counter.innerText = num;
-    let counterIntervalId = setInterval(function(){
-        num--;
-        counter.innerText = num;
-        if (num==0) clearInterval(counterIntervalId);
-    }, 1000);
-});
+    if (num==0) clearInterval(counterIntervalId);
+}, 1000);

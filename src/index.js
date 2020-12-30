@@ -108,6 +108,10 @@ const createWindow = () => {
     if (minimize) mainWindow.minimize();
   });
 
+  ipcMain.on('stop-record', () => {
+    mainWindow.focus();
+  });
+
 };
 
 // This method will be called when Electron has finished

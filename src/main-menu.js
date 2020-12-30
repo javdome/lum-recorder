@@ -172,6 +172,7 @@ window.onload = () => {
       stream.getTracks().forEach(s=>s.stop())
       videoElement.srcObject = null
       stream = null;
+      ipcRenderer.send('stop-record');
     };
 
 

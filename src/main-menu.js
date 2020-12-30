@@ -10,6 +10,7 @@ window.onload = () => {
     const download = document.getElementById('download');
     const audioToggle = document.getElementById('audioToggle');
     const micAudioToggle = document.getElementById('micAudioToggle');
+    const minimizeOnRecord = document.getElementById('minimizeOnRecord');
 
     const cancelBtn = document.getElementById('cancelBtn');
     const faceBtn = document.getElementById('faceBtn');
@@ -149,10 +150,11 @@ window.onload = () => {
 
     /* STARTS TO RECORD */
     startBtn.onclick = () => {
+      const minimize = minimizeOnRecord.checked || false;
       startBtn.disabled = true;
       cancelBtn.disabled = true;
       stopBtn.disabled = false;
-      ipcRenderer.send('start-counter');
+      ipcRenderer.send('start-record', minimize);
       setTimeout( () => { rec.start() }, 6100);
     };
   

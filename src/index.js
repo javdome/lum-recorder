@@ -98,13 +98,14 @@ const createWindow = () => {
     }
   });
 
-  //Shows and hides de counter
-  ipcMain.on('start-counter', () => {
+  //Shows and hides de counter and minimize main window if it is required.
+  ipcMain.on('start-record', (event, minimize) => {
     createWinCounter();
     setTimeout( () => {
       winCounter.close();
       winCounter = null;
     }, 6000);
+    if (minimize) mainWindow.minimize();
   });
 
 };

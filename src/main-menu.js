@@ -2,7 +2,7 @@ const { desktopCapturer, ipcRenderer, remote } = require('electron');
 const { Menu } = remote;
 
 window.onload = () => {
-    const warningEl = document.getElementById('warning');
+    // const warningEl = document.getElementById('warning');
     const videoElement = document.getElementById('videoElement');
     const captureBtn = document.getElementById('captureBtn');
     const startBtn = document.getElementById('startBtn');
@@ -20,7 +20,7 @@ window.onload = () => {
 
 
     
-    if('getDisplayMedia' in navigator.mediaDevices) warningEl.style.display = 'none';
+    // if('getDisplayMedia' in navigator.mediaDevices) warningEl.style.display = 'none';
   
     let blobs;
     let blob;

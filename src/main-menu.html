@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Simple Screen Record!</title>
+    <title>Lum Screen Recorder</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="./main-menu.css">
   </head>  
   <body>
-    <h1>World's Simplest Screenrecorder with Voice</h1>
-    <p id="warning">
+    <!-- <h1>Lum - Screenrecorder with Voice</h1> -->
+    <!-- <p id="warning">
       Enable chrome://flags/#enable-experimental-web-platform-features
-    </p>
+    </p> -->
+    <p>Preview:</p>
     <video id="videoElement" autoplay muted></video>
     <br />
     <button id="captureBtn">Selecciona pantalla</button>
@@ -28,5 +29,12 @@
     <input type="checkbox" id="micAudioToggle" />
     <label for="micAudioToggle">Capture Audio from Microphone</label>
     <a id="download" href="#" style="display: none;">Download</a>
+    <div id="info">
+      <p>Shortcuts:</p>
+      <ul>
+        <li>Ctrl + Alt + 1: Toggles the size of the rounded view of the face.</li>
+        <li>Ctrl + Alt + 9: Stops recording.</li>
+      </ul>
+    </div>
   </body>
 </html>

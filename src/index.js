@@ -67,7 +67,7 @@ const createWinCounter = () => {
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 650,
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
@@ -79,7 +79,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'main-menu.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   mainWindow.on('close', () => {
     if (winCounter != null) winCounter.close();

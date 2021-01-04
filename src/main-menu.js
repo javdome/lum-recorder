@@ -138,7 +138,7 @@ window.onload = () => {
           let url = window.URL.createObjectURL(fixedBlob);
           download.href = url;
           download.download = 'test.webm';
-          download.style.display = 'block';
+          download.style.display = 'inline-block';
         });
       };
       startBtn.disabled = false;

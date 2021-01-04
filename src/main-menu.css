@@ -12,8 +12,8 @@ h1 {
 }
 
 video {
-  width: 480px;
-  height: 360px;
+  width: 360px;
+  height: 203px;
 }
 
 button {
@@ -23,4 +23,20 @@ button {
 
 #info {
   text-align: left;
+}
+
+#download {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin: auto;
+}
+
+/* Dropdown button on hover & focus */
+#download:hover, #download:focus {
+  background-color: #2980B9;
 }

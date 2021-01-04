@@ -1,5 +1,8 @@
 const { desktopCapturer, ipcRenderer, remote } = require('electron');
 const { Menu } = remote;
+//https://github.com/yusitnikov/fix-webm-duration
+const ysFixWebmDuration = require('./lib/fix-webm-duration');
+
 
 window.onload = () => {
     // const warningEl = document.getElementById('warning');
@@ -29,6 +32,8 @@ window.onload = () => {
     let stream;
     let voiceStream;
     let desktopStream;
+
+    let startTime;
     
     const mergeAudioStreams = (desktopStream, voiceStream) => {
       const context = new AudioContext();
@@ -107,16 +112,18 @@ window.onload = () => {
         
       blobs = [];
     
-      rec = new MediaRecorder(stream, {mimeType: 'video/webm; codecs=vp9,opus'});
+      rec = new MediaRecorder(stream, {mimeType: 'video/webm\;codecs=vp9'});
       rec.ondataavailable = (e) => blobs.push(e.data);
       rec.onstop = async () => {
-        
+        var duration = Date.now() - startTime;
         //blobs.push(MediaRecorder.requestData());
         blob = new Blob(blobs, {type: 'video/webm'});
-        let url = window.URL.createObjectURL(blob);
-        download.href = url;
-        download.download = 'test.webm';
-        download.style.display = 'block';
+        ysFixWebmDuration(blob, duration, function(fixedBlob) {
+          let url = window.URL.createObjectURL(fixedBlob);
+          download.href = url;
+          download.download = 'test.webm';
+          download.style.display = 'block';
+        });
       };
       startBtn.disabled = false;
       captureBtn.disabled = true;
@@ -155,7 +162,10 @@ window.onload = () => {
       cancelBtn.disabled = true;
       stopBtn.disabled = false;
       ipcRenderer.send('start-record', minimize);
-      setTimeout( () => { rec.start() }, 6100);
+      setTimeout( () => { 
+        rec.start();
+        startTime = Date.now();
+      }, 6100);
     };
   
 

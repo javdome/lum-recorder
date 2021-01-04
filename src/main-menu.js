@@ -84,16 +84,32 @@ window.onload = () => {
       download.style.display = 'none';
       const audio = audioToggle.checked || false;
       const mic = micAudioToggle.checked || false;
-          
-      desktopStream = await navigator.mediaDevices.getUserMedia({
-        audio: false,
-        video: {
-          mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSourceId: source.id,
+      console.log(audio);
+      if (audio === true) {
+        desktopStream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            mandatory: {
+              chromeMediaSource: 'desktop'
+            }
+          },
+          video: {
+            mandatory: {
+              chromeMediaSource: 'desktop',
+              chromeMediaSourceId: source.id,
+            }
           }
-        }
-      })
+        })
+      } else {
+        desktopStream = await navigator.mediaDevices.getUserMedia({
+          audio: false,
+          video: {
+            mandatory: {
+              chromeMediaSource: 'desktop',
+              chromeMediaSourceId: source.id,
+            }
+          }
+        })
+      }
       
       if (mic === true) {
         voiceStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: mic });
@@ -112,7 +128,7 @@ window.onload = () => {
         
       blobs = [];
     
-      rec = new MediaRecorder(stream, {mimeType: 'video/webm\;codecs=vp9'});
+      rec = new MediaRecorder(stream, {mimeType: 'video/webm; codecs=vp9,opus'});
       rec.ondataavailable = (e) => blobs.push(e.data);
       rec.onstop = async () => {
         var duration = Date.now() - startTime;

@@ -19,12 +19,16 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "src/icon/lum-recorder-icon.ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "lum_recorder"
+            "name": "lum_recorder",
+            "loadingGif": "src/icon/LogoJDB.gif",
+            "setupIcon": "src/icon/lum-recorder-icon.ico"
           }
         },
         {

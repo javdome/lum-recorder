@@ -69,6 +69,7 @@ const createWindow = () => {
     width: 800,
     height: 650,
     autoHideMenuBar: true,
+    icon: __dirname +'/icon/lum-recorder-icon.ico',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,

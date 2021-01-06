@@ -205,4 +205,13 @@ window.onload = () => {
     ipcRenderer.on('please-stop', function(){
       if (!stopBtn.disabled) stopBtn.click();
     });
-  };
+
+    
+    // Open the github link in the default browser
+    document.getElementById('github-link').addEventListener('click', event => {
+      event.preventDefault();
+      require("electron").shell.openExternal(event.target.href);
+    });
+
+
+};

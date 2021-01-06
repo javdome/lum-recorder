@@ -66,7 +66,7 @@ const createWinCounter = () => {
 // Create the main menu window.
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 850,
     height: 650,
     autoHideMenuBar: true,
     icon: __dirname +'/icon/lum-recorder-icon.ico',

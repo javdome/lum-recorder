@@ -27,13 +27,31 @@
     <input type="checkbox" id="minimizeOnRecord" />
     <label for="minimizeOnRecord">Minimize on start recording</label>
     <br>
-    <button id="captureBtn">Select screen</button>
-    <button id="startBtn" disabled>Start Recording</button>
-    <button id="stopBtn" disabled>Stop Capture</button>
-    <button id="faceBtn">Face</button>
-    <button id="cancelBtn" disabled>Cancelar</button>
+    <button id="captureBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><rect x="32" y="48" width="192" height="144" rx="16" transform="translate(256 240) rotate(180)" stroke-width="16" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" fill="none"></rect><line x1="160" y1="224" x2="96" y2="224" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="32" y1="152" x2="224" y2="152" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="128" y1="192" x2="128" y2="224" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg>
+      Select screen
+    </button>
+    <button id="startBtn" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#af1d1d" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="128" cy="128" r="64" opacity="0.2"></circle><circle cx="128" cy="128" r="96" fill="none" stroke="#af1d1d" stroke-miterlimit="10" stroke-width="16"></circle><circle cx="128" cy="128" r="64" fill="none" stroke="#af1d1d" stroke-miterlimit="10" stroke-width="16"></circle></svg>
+      Recording
+      </button>
+    <button id="stopBtn" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><rect x="44" y="44" width="168" height="168" rx="14.90918"></rect></svg>
+      Stop Capture
+    </button>
+    <button id="faceBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><g><circle cx="128" cy="120" r="44"></circle><path d="M128,24A104,104,0,1,0,232,128,104.11791,104.11791,0,0,0,128,24Zm65.75806,162.41016a79.70266,79.70266,0,0,0-24.43091-22.97461,59.83641,59.83641,0,0,1-82.6543,0A79.7048,79.7048,0,0,0,62.2417,186.41016a88.00015,88.00015,0,1,1,131.51636,0Z"></path></g></svg>
+      Webcam
+    </button>
+    <button id="cancelBtn" disabled>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><circle cx="128" cy="128" r="96" fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="16"></circle><line x1="160" y1="96" x2="96" y2="160" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="160" y1="160" x2="96" y2="96" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg>
+      Cancel
+    </button>
     <br>
-    <a id="download" href="#" style="display: none;">Download</a>
+    <a id="download" href="#" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#ffffff" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><polyline points="86 110 128 152 170 110" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline><line x1="128" y1="39.97056" x2="128" y2="151.97056" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><path d="M224,136v72a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V136" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path></svg>
+      Download
+    </a>
     <div id="info">
       <p>Shortcuts:</p>
       <ul>

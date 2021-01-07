@@ -23,7 +23,6 @@ const createWinFace = () => {
     // show: false,
     transparent: true,
     autoHideMenuBar: true,
-    // icon: __dirname +'/rounded-cam-icon.ico',
     webPreferences: {
       nodeIntegration: true
     }
@@ -53,7 +52,6 @@ const createWinCounter = () => {
     // show: false,
     transparent: true,
     autoHideMenuBar: true,
-    // icon: __dirname +'/rounded-cam-icon.ico',
     webPreferences: {
       nodeIntegration: true
     }
@@ -69,7 +67,7 @@ const createWindow = () => {
     width: 850,
     height: 650,
     autoHideMenuBar: true,
-    icon: __dirname +'/icon/lum-recorder-icon.ico',
+    icon: __dirname +'/assets/lum-recorder-icon.ico',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,

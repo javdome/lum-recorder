@@ -14,6 +14,7 @@ window.onload = () => {
     const audioToggle = document.getElementById('audioToggle');
     const micAudioToggle = document.getElementById('micAudioToggle');
     const minimizeOnRecord = document.getElementById('minimizeOnRecord');
+    const qualitySelect = document.getElementById('quality');
 
     const cancelBtn = document.getElementById('cancelBtn');
     const faceBtn = document.getElementById('faceBtn');
@@ -32,9 +33,15 @@ window.onload = () => {
     let stream;
     let voiceStream;
     let desktopStream;
-
+    // let quality;
     let startTime;
     
+    /* QUALITY SELECTION */
+    // quality = 
+
+
+
+    /* MERGING STREAMS  */ 
     const mergeAudioStreams = (desktopStream, voiceStream) => {
       const context = new AudioContext();
       const destination = context.createMediaStreamDestination();
@@ -128,7 +135,11 @@ window.onload = () => {
         
       blobs = [];
     
-      rec = new MediaRecorder(stream, {mimeType: 'video/webm; codecs=vp9,opus'});
+      rec = new MediaRecorder(stream, {
+        audioBitsPerSecond : 128000,
+        videoBitsPerSecond : parseInt(qualitySelect.value),
+        mimeType: 'video/webm; codecs=vp9,opus'
+      });
       rec.ondataavailable = (e) => blobs.push(e.data);
       rec.onstop = async () => {
         var duration = Date.now() - startTime;
@@ -137,7 +148,7 @@ window.onload = () => {
         ysFixWebmDuration(blob, duration, function(fixedBlob) {
           let url = window.URL.createObjectURL(fixedBlob);
           download.href = url;
-          download.download = 'test.webm';
+          download.download = 'lum-record.webm';
           download.style.display = 'inline-block';
         });
       };
@@ -145,6 +156,7 @@ window.onload = () => {
       captureBtn.disabled = true;
       audioToggle.disabled = true;
       micAudioToggle.disabled = true;
+      qualitySelect.disabled =  true;
 
       cancelBtn.disabled = false;
     };
@@ -159,6 +171,7 @@ window.onload = () => {
       startBtn.disabled = true;
       stopBtn.disabled = true;
       cancelBtn.disabled = true;
+      qualitySelect.disabled = false;
 
       blobs = undefined;
       blob = undefined;
@@ -192,6 +205,7 @@ window.onload = () => {
       micAudioToggle.disabled = false;
       startBtn.disabled = true;
       stopBtn.disabled = true;
+      qualitySelect.disabled = false;
       
       rec.stop();
       

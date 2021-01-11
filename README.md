@@ -19,12 +19,13 @@
 * 😃 Insert your webcam in a circle that you can move around.
 * 🎤 Insert your audio microphone.
 * 🔈 Insert your audio system.
+* 🎨 Select the quality of the recording.
 * 🕐 Countdown when starts the recording.
 * 👉 Some useful shortcuts.
 
 <br>
 
-![LumCaptura01](https://user-images.githubusercontent.com/36993404/103884094-6311ba00-50de-11eb-9eac-b5ade3cb9f4e.JPG)
+![image](https://user-images.githubusercontent.com/36993404/104153994-06671580-53e4-11eb-97ae-76ed4687fc17.png)
 
 <br>
 

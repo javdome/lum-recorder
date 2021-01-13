@@ -1,7 +1,7 @@
 {
   "name": "lum-recorder",
   "productName": "lum-recorder",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Screen recorder with options like audio system, microphone, webcam, etc...",
   "main": "src/index.js",
   "scripts": {
@@ -28,7 +28,8 @@
           "config": {
             "name": "lum_recorder",
             "loadingGif": "src/assets/Logo-Lum.gif",
-            "setupIcon": "src/assets/lum-recorder-icon.ico"
+            "setupIcon": "src/assets/lum-recorder-icon.ico",
+            "iconUrl": "https://github.com/javdome/lum-recorder/blob/master/src/assets/lum-recorder-icon.ico?raw=true"
           }
         },
         {

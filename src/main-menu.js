@@ -1,5 +1,6 @@
 const { desktopCapturer, ipcRenderer, remote } = require('electron');
-const { Menu } = remote;
+const { writeFile } = require('fs');
+const { dialog, Menu } = remote;
 //https://github.com/yusitnikov/fix-webm-duration
 const ysFixWebmDuration = require('./lib/fix-webm-duration');
 
@@ -10,7 +11,6 @@ window.onload = () => {
     const captureBtn = document.getElementById('captureBtn');
     const startBtn = document.getElementById('startBtn');
     const stopBtn = document.getElementById('stopBtn');
-    const download = document.getElementById('download');
     const audioToggle = document.getElementById('audioToggle');
     const micAudioToggle = document.getElementById('micAudioToggle');
     const minimizeOnRecord = document.getElementById('minimizeOnRecord');
@@ -88,7 +88,6 @@ window.onload = () => {
     
     
     async function selectSource(source) {
-      download.style.display = 'none';
       const audio = audioToggle.checked || false;
       const mic = micAudioToggle.checked || false;
       console.log(audio);
@@ -145,11 +144,17 @@ window.onload = () => {
         var duration = Date.now() - startTime;
         //blobs.push(MediaRecorder.requestData());
         blob = new Blob(blobs, {type: 'video/webm'});
-        ysFixWebmDuration(blob, duration, function(fixedBlob) {
-          let url = window.URL.createObjectURL(fixedBlob);
-          download.href = url;
-          download.download = 'lum-record.webm';
-          download.style.display = 'inline-block';
+        ysFixWebmDuration(blob, duration, async function(fixedBlob) {
+          const buffer = Buffer.from(await fixedBlob.arrayBuffer());
+          const { filePath } = await dialog.showSaveDialog({
+            buttonLabel: 'Save video',
+            defaultPath: `vid-${Date.now()}.webm`,
+            filters: [ { name: 'Video', extensions: ['webm'] } ]
+          });
+        
+          if (filePath) {
+            writeFile(filePath, buffer, () => console.log('video saved successfully!'));
+          }
         });
       };
       startBtn.disabled = false;

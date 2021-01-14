@@ -30,21 +30,6 @@ a {
   text-align: left;
 }
 
-#download {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  margin: auto;
-}
-
-/* Dropdown button on hover & focus */
-#download:hover, #download:focus {
-  background-color: #2980B9;
-}
-
 svg {
   vertical-align: middle;
 }

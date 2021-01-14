@@ -142,10 +142,12 @@ if (!gotTheLock) {
       if(winFace !=null ) {
         if (bigFace) {
           winFace.setSize(250,250);
+          winFace.setPosition(winFace.getPosition()[0] + 195, winFace.getPosition()[1] + 195);
           bigFace = false;
           
         } else {
           winFace.setSize(640,640);
+          winFace.setPosition(winFace.getPosition()[0] - 195, winFace.getPosition()[1] - 195);
           bigFace = true;
         }
       }

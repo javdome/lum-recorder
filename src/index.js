@@ -73,6 +73,7 @@ const createWindow = () => {
       enableRemoteModule: true,
     }
   });
+  mainWindow.removeMenu();
  
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'main-menu.html'));

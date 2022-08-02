@@ -18,9 +18,11 @@ window.onload = () => {
 
     const cancelBtn = document.getElementById('cancelBtn');
     const faceBtn = document.getElementById('faceBtn');
+    const roundedCam = document.getElementById('roundedCam');
 
     faceBtn.onclick = () => {
-      ipcRenderer.send('faceBtn-clicked');
+      ipcRenderer.send('faceBtn-clicked', roundedCam.checked);
+      roundedCam.disabled = !roundedCam.disabled;
     };
 
 

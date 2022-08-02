@@ -11,12 +11,13 @@ let bigFace = false;
 let winFace = null;
 let mainWindow;
 let winCounter = null;
+let isCamRounded = false;
 
 // Create the rounded face window.
 const createWinFace = () => { 
   winFace = new BrowserWindow({
-    width: 250,
-    height: 250,
+    width: 333,
+    height: 240,
     alwaysOnTop: true,
     maximizable:false,
     frame: false,
@@ -29,6 +30,9 @@ const createWinFace = () => {
   });
   winFace.setAlwaysOnTop(true, "screen-saver");
   winFace.loadFile(path.join(__dirname, 'face.html'));
+  winFace.webContents.on('did-finish-load', () => {
+    winFace.webContents.send('loaded', [isCamRounded]);
+  });
   // winFace.webContents.openDevTools();
   bigFace = false;
 
@@ -87,8 +91,9 @@ const createWindow = () => {
   });
 
   //Toggles the visibility of the rounded face
-  ipcMain.on('faceBtn-clicked', () => {
+  ipcMain.on('faceBtn-clicked', (event, roundedCam) => {
     if(!isShownFace) {
+      isCamRounded = roundedCam;
       createWinFace();
       isShownFace = true;
     } else {
@@ -141,13 +146,13 @@ if (!gotTheLock) {
     globalShortcut.register('Alt+CommandOrControl+1', () => {
       if(winFace !=null ) {
         if (bigFace) {
-          winFace.setSize(250,250);
-          winFace.setPosition(winFace.getPosition()[0] + 195, winFace.getPosition()[1] + 195);
+          winFace.setSize(320,240);
+          winFace.setPosition(winFace.getPosition()[0] + 240, winFace.getPosition()[1] + 180);
           bigFace = false;
           
         } else {
-          winFace.setSize(640,640);
-          winFace.setPosition(winFace.getPosition()[0] - 195, winFace.getPosition()[1] - 195);
+          winFace.setSize(800,600);
+          winFace.setPosition(winFace.getPosition()[0] - 240, winFace.getPosition()[1] - 180);
           bigFace = true;
         }
       }

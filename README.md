@@ -3,7 +3,7 @@
 <br>
 
 # Lum Screen Recorder
-🎥💻 Screen recorder with some options like adding your webcam in a circle that you can move around. Build with Electron.
+🎥💻 Screen recorder with some options like adding your webcam in a square, or a circle, that you can move around. Build with Electron.
 
 ![example](https://user-images.githubusercontent.com/36993404/103951818-a3555480-513f-11eb-8258-ac418fd9b02f.gif)
 
@@ -16,7 +16,7 @@
 
 ## Features
 * 💻 Select from multiple desktops.
-* 😃 Insert your webcam in a circle that you can move around.
+* 😃 Insert your webcam in a circle 🔴, or in a square 🟥, that you can move around.
 * 🎤 Insert your audio microphone.
 * 🔈 Insert your audio system.
 * 🎨 Select the quality of the recording.
@@ -25,7 +25,7 @@
 
 <br>
 
-![image](https://user-images.githubusercontent.com/36993404/104153994-06671580-53e4-11eb-97ae-76ed4687fc17.png)
+![image](https://user-images.githubusercontent.com/36993404/182353933-dd731739-6bdb-4413-85ac-9b9ea6611cac.PNG)
 
 <br>
 

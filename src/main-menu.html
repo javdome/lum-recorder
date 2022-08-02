@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Lum Screen Recorder</title>
+    <title>Lum Screen Recorder (v1.4.0)</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,9 @@
     <input type="checkbox" id="micAudioToggle" />
     <label for="micAudioToggle">Capture Audio from Microphone</label>
     <br>
+    <input type="checkbox" id="minimizeOnRecord" />
+    <label for="minimizeOnRecord">Minimize on start recording</label>
+    <br>
     <label for="quality">Choose a quality:</label>
     <select name="quality" id="quality">
       <option value="2500000">High (2.5 Mbit/s)</option>
@@ -33,6 +36,9 @@
     <br>
     <input type="checkbox" id="minimizeOnRecord" />
     <label for="minimizeOnRecord">Minimize on start recording</label>
+    <br>
+    <input type="checkbox" id="roundedCam"/>
+    <label for="roundedCam">Rounded webcam (by default is squared)</label>
     <br>
     <button id="captureBtn">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><rect x="32" y="48" width="192" height="144" rx="16" transform="translate(256 240) rotate(180)" stroke-width="16" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" fill="none"></rect><line x1="160" y1="224" x2="96" y2="224" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="32" y1="152" x2="224" y2="152" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="128" y1="192" x2="128" y2="224" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg>
@@ -58,7 +64,7 @@
     <div id="info">
       <p>Shortcuts:</p>
       <ul>
-        <li>Ctrl + Alt + 1: Toggles the size of the rounded view of the face.</li>
+        <li>Ctrl + Alt + 1: Toggles the size of the webcam view.</li>
         <li>Ctrl + Alt + 9: Stops recording.</li>
       </ul>
     </div>

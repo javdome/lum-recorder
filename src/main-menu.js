@@ -13,6 +13,7 @@ window.onload = () => {
     const stopBtn = document.getElementById('stopBtn');
     const audioToggle = document.getElementById('audioToggle');
     const micAudioToggle = document.getElementById('micAudioToggle');
+    const micDevice = document.getElementById('micDevice');
     const minimizeOnRecord = document.getElementById('minimizeOnRecord');
     const qualitySelect = document.getElementById('quality');
 
@@ -20,6 +21,23 @@ window.onload = () => {
     const faceBtn = document.getElementById('faceBtn');
     const roundedCam = document.getElementById('roundedCam');
 
+    /* ADDING MICS AVAILABLE */
+    micAudioToggle.onchange = () => {
+      micDevice.disabled = !micAudioToggle.checked
+    }
+
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      devices.map((device) => {
+        if (device.kind == 'audioinput') {
+          micDevice.options[micDevice.options.length] = new Option(device.label, device.deviceId);
+        }
+      })
+    })
+
+
+
+
+  /* FACE BUTTON AND LOGO SELECTION */
     faceBtn.onclick = () => {
       ipcRenderer.send('faceBtn-clicked', roundedCam.checked);
       roundedCam.disabled = !roundedCam.disabled;
@@ -120,7 +138,11 @@ window.onload = () => {
       }
       
       if (mic === true) {
-        voiceStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: mic });
+        // voiceStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: mic });
+        voiceStream = await navigator.mediaDevices.getUserMedia({
+          video: false,
+          audio: {deviceId: micDevice.value ? {exact: micDevice.value} : undefined}
+        });
       }
     
       const tracks = [
@@ -163,6 +185,7 @@ window.onload = () => {
       captureBtn.disabled = true;
       audioToggle.disabled = true;
       micAudioToggle.disabled = true;
+      micDevice.disabled = true;
       qualitySelect.disabled =  true;
 
       cancelBtn.disabled = false;
@@ -175,6 +198,7 @@ window.onload = () => {
       captureBtn.disabled = false;
       audioToggle.disabled = false;
       micAudioToggle.disabled = false;
+      micDevice.disabled = !micAudioToggle.checked;
       startBtn.disabled = true;
       stopBtn.disabled = true;
       cancelBtn.disabled = true;
@@ -210,6 +234,7 @@ window.onload = () => {
       captureBtn.disabled = false;
       audioToggle.disabled = false;
       micAudioToggle.disabled = false;
+      micDevice.disabled = !micAudioToggle.checked;
       startBtn.disabled = true;
       stopBtn.disabled = true;
       qualitySelect.disabled = false;

@@ -95,6 +95,7 @@ const createWindow = () => {
     if(!isShownFace) {
       isCamRounded = roundedCam;
       createWinFace();
+      if(isCamRounded) winFace.setSize(290,290);
       isShownFace = true;
     } else {
       winFace.close();
@@ -145,12 +146,22 @@ if (!gotTheLock) {
     
     globalShortcut.register('Alt+CommandOrControl+1', () => {
       if(winFace !=null ) {
-        if (bigFace) {
+        if (bigFace && isCamRounded) {
+          winFace.setSize(290,290);
+          winFace.setPosition(winFace.getPosition()[0] + 205, winFace.getPosition()[1] + 205);
+          bigFace = false;
+        
+        } else if (bigFace && !isCamRounded) {
           winFace.setSize(320,240);
           winFace.setPosition(winFace.getPosition()[0] + 240, winFace.getPosition()[1] + 180);
           bigFace = false;
           
-        } else {
+        } else if(!bigFace && isCamRounded) {
+          winFace.setSize(700,700);
+          winFace.setPosition(winFace.getPosition()[0] - 205, winFace.getPosition()[1] - 205);
+          bigFace = true;
+
+        } else { //(!bigFace && !isCamRounded)
           winFace.setSize(800,600);
           winFace.setPosition(winFace.getPosition()[0] - 240, winFace.getPosition()[1] - 180);
           bigFace = true;

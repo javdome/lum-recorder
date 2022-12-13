@@ -17,7 +17,7 @@
 ## Features
 * 💻 Select from multiple desktops.
 * 😃 Insert your webcam in a circle 🔴, or in a square 🟥, that you can move around.
-* 🎤 Insert your audio microphone.
+* 🎤 Select and insert your audio microphone.
 * 🔈 Insert your audio system.
 * 🎨 Select the quality of the recording.
 * 🕐 Countdown when starts the recording.
@@ -25,7 +25,7 @@
 
 <br>
 
-![image](https://user-images.githubusercontent.com/36993404/182353933-dd731739-6bdb-4413-85ac-9b9ea6611cac.PNG)
+![image](https://user-images.githubusercontent.com/36993404/207299318-7e35b93c-b94c-4512-ba51-d93d0728d201.PNG)
 
 <br>
 
